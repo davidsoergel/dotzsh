@@ -1,0 +1,188 @@
+# functions are in ~/loraxhome
+# (or ~/loraxhome-edit for testing)
+
+fpath=($ZDOTDIR $fpath)
+
+# Window Titles
+case $TERM in
+    xterm*)
+    	print -Pn "\e]0;%n@%m: %~\a"
+        chpwd() {print -Pn "\e]0;%n@%m: %~\a"}
+        ;;
+esac
+
+# Calculator
+calc(){ awk "BEGIN{ print $* }" ;}
+
+
+# Command Aliases
+alias vi=vim
+alias ls-al='ls -al'
+alias la='ls -al'
+alias h='history'
+
+# Global aliases
+alias -g L='| less'
+
+# SSH Aliases
+alias lorax='ssh -A lorax@lorax.org; chpwd'
+alias two='ssh -A lorax@two.lorax.org; chpwd'
+alias brass='ssh -A soergel@brass.berkeley.edu; chpwd'
+alias orchid='ssh -A soergel@orchid.berkeley.edu; chpwd'   
+alias weed='ssh -A soergel@weed.berkeley.edu; chpwd'   
+alias ikelite='ssh -A dsoergel@ikelite.rocksclusters.org'
+alias ikelitex='ssh -c arcfour,blowfish-cbc -XC dsoergel@ikelite.rocksclusters.org'
+alias dev='ssh -A dev.davidsoergel.com; chpwd'
+#alias korn='ssh -t -A soergel@brass.berkeley.edu ssh -t -A korn; chpwd'  
+#alias kornx='ssh -t -A -X soergel@brass.berkeley.edu ssh -t -A -X korn; chpwd'
+#alias weed='ssh -t -A soergel@brass.berkeley.edu ssh -t -A weed; chpwd'  
+#alias weedx='ssh -t -A -c arcfour,blowfish-cbc -XC soergel@brass.berkeley.edu ssh -t -A -c arcfour,blowfish-cbc -XC weed; chpwd'
+
+
+# Setup History
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zshhistory
+
+
+# Variables used by zsh
+LISTMAX=1000  # "Never" ask
+LOGCHECK=60
+WATCHFMT="[%B%t%b] %B%n%b has %a %B%l%b from %B%M%b"
+TMOUT=0
+MAILCHECK=0
+
+
+# Prompts
+#autoload -U promptinit
+#promptinit
+#prompt adam1
+autoload loraxprompt
+loraxprompt
+#source ~/loraxhome-edit/adam1-vcsinfo
+
+
+# Completions
+autoload -U compinit
+compinit -C # don't perform security check
+
+# Fink
+if [[ -x /sw/bin/init.sh ]]; then
+	source  /sw/bin/init.sh   
+fi
+
+# Options
+setopt                       \
+     NO_all_export           \
+        always_last_prompt   \
+     NO_always_to_end          \
+        append_history         \
+        auto_cd                \
+        auto_list              \
+        auto_menu              \
+     NO_auto_name_dirs         \
+        auto_param_keys        \
+        auto_param_slash       \
+        auto_pushd             \
+        auto_remove_slash      \
+     NO_auto_resume            \
+        bad_pattern            \
+        bang_hist              \
+     NO_beep                   \
+     NO_brace_ccl              \
+        correct_all            \
+     NO_bsd_echo               \
+        cdable_vars            \
+     NO_chase_links            \
+     NO_clobber                \
+        complete_aliases       \
+        complete_in_word       \
+     NO_correct                \
+        correct_all            \
+     NO_csh_junkie_history     \
+     NO_csh_junkie_loops       \
+     NO_csh_junkie_quotes      \
+     NO_csh_null_glob          \
+        equals                 \
+        extended_glob          \
+        extended_history       \
+        function_argzero       \
+        glob                   \
+     NO_glob_assign            \
+        glob_complete          \
+     NO_glob_dots              \
+     NO_glob_subst             \
+        hash_cmds              \
+        hash_dirs              \
+        hash_list_all          \
+        hist_allow_clobber     \
+        hist_beep              \
+        hist_ignore_dups       \
+        hist_ignore_space      \
+     NO_hist_no_store          \
+        hist_verify            \
+        hist_expire_dups_first \
+     NO_hist_ignore_all_dups   \
+        hist_no_functions      \
+     NO_hist_save_no_dups      \
+        hist_reduce_blanks     \
+     NO_ignore_braces          \
+     NO_ignore_eof             \
+        inc_append_history     \
+        interactive_comments   \
+     NO_ksh_glob               \
+     NO_list_ambiguous         \
+     NO_list_beep              \
+        list_packed            \
+        list_types             \
+        long_list_jobs         \
+        magic_equal_subst      \
+     NO_mail_warning           \
+     NO_mark_dirs              \
+     NO_menu_complete          \
+        multios                \
+        nohup                  \
+        nomatch                \
+        notify                 \
+     NO_null_glob              \
+        numeric_glob_sort      \
+     NO_overstrike             \
+        path_dirs              \
+        posix_builtins         \
+     NO_print_exit_value       \
+        prompt_cr              \
+        prompt_subst           \
+        pushd_ignore_dups      \
+     NO_pushd_minus            \
+        pushd_silent           \
+        pushd_to_home          \
+        rc_expand_param        \
+     NO_rc_quotes              \
+     NO_rm_star_silent         \
+     NO_rm_star_wait           \
+        share_history          \
+     NO_sh_file_expansion      \
+        sh_option_letters      \
+        short_loops            \
+        sh_word_split          \
+     NO_single_line_zle        \
+     NO_sun_keyboard_hack      \
+        unset                  \
+     NO_verbose                \
+        zle                  
+        
+        
+# reverse unwanted aliasing of `which' by distribution startup
+# files (e.g. /etc/profile.d/which*.sh); zsh's 'which' is perfectly
+# good as is.
+
+alias which >&/dev/null && unalias which
+
+# run-help
+
+alias run-help >&/dev/null && unalias run-help
+autoload run-help
+
+
+# local customizations
+source ~/.zshrc.local

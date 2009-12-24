@@ -1,0 +1,14 @@
+
+Lorax zsh config files
+======================
+
+.zshrc files should generally go in .zsh, which is in mercurial.  The home dir should contain only the stub .zshenv (see .zshenv.home) to set $ZDOTDIR, and .zshrc.local.
+
+I originally had separate branches for different machines, in order to store the .zshrc.local files too.  This turned out to be too much hassle, so never mind that.
+
+
+SSH files
+=========
+
+ssh files are prototypes; they probably shouldn't be linked from the active locations, but they may be diffed
+

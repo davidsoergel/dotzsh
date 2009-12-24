@@ -1,0 +1,6 @@
+# ~/.zshenv
+# ZDOTDIR
+ZDOTDIR=$HOME/.zsh
+
+# Load ~/.zsh/.zshenv
+source $ZDOTDIR/.zshenv
