@@ -74,10 +74,11 @@ loraxprompt () {
 	base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%(K{.*?}|k)//g")
 	post_prompt_no_color=$(echo "$post_prompt" | perl -pe "s/%(K{.*?}|k)//g")
 
-	add-zsh-hook precmd loraxprompt_precmd
+#	add-zsh-hook precmd loraxprompt_precmd
 }
 
-loraxprompt_precmd () {
+#loraxprompt_precmd () {
+function precmd {
 	setopt noxtrace localoptions
 
 	local TERMWIDTH
@@ -124,4 +125,4 @@ loraxprompt_precmd () {
 	# %D{%a %m %d %t} TEST"
 }
 
-loraxprompt "$@"
+loraxprompt
