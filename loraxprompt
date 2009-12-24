@@ -75,12 +75,28 @@ loraxprompt () {
 	
 	zstyle ':vcs_info:*:prompt:*' formats       "%s"              "%b"
 	
-	base_prompt="%K{blue}%n@%m%k "
-	post_prompt="%b%f%k"
+	prompt_adam1_color1=${1:-'blue'}
+  prompt_adam1_color2=${2:-'cyan'}
+  prompt_adam1_color3=${3:-'green'}
+
+	# for older versions
+	base_prompt="%{$bg_no_bold[$prompt_adam1_color1]%}%n@%m%{$reset_color%} "
+	post_prompt="%{$reset_color%}"
+
+	# these work only in zsh 4.3.x?
+	#base_prompt="%K{blue}%n@%m%k "
+	#post_prompt="%b%f%k"
 	dateformat='%D{%a %m/%d} %t';
 	
-	base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%(K{.*?}|k)//g")
-	post_prompt_no_color=$(echo "$post_prompt" | perl -pe "s/%(K{.*?}|k)//g")
+	
+	# new versions
+	#base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%([FK]{.*?}|k)//g")
+	post_prompt_no_color=$(echo "$post_prompt" | perl -pe "s/%([FK]{.*?}|k)//g")
+	
+	# old versions
+	base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%{.*?%}//g")
+	post_prompt_no_color=$(echo "$post_prompt" | perl -pe "s/%{.*?%}//g")
+	
 
 #	add-zsh-hook precmd loraxprompt_precmd
 }
@@ -109,7 +125,6 @@ function precmd {
 		fi
 	fi
 	
-	base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%([FK]{.*?}|k)//g")
 	base_prompt_expanded_no_color=$(print -P "$base_prompt_no_color")
 	
 	local promptsize
@@ -128,7 +143,10 @@ function precmd {
 		PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
     fi
 
-	path_prompt='%B%F{green}%$PR_PWDLEN<...<%~%<<${PR_RESET}'
+	#path_prompt="%{$fg_bold[$prompt_adam1_color3]%}%${space_left}<...<%~$prompt_newline%{$fg_bold_white%}"
+	path_prompt="%{$fg_bold[$prompt_adam1_color3]%}%$PR_PWDLEN<...<%~%<<%{$fg_bold_white%}"
+
+	#path_prompt='%B%F{green}%$PR_PWDLEN<...<%~%<<${PR_RESET}'
 	
 	local errorcode='%(?..${PR_BRIGHT_RED}(%?%) ${PR_RESET})%(2L.+.)'
 	          
