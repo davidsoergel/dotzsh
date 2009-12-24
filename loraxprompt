@@ -21,6 +21,14 @@ autoload -Uz vcs_info
 
 loraxprompt () {
 	
+    if [[ $ZSH_VERSION == 4.3.<6->* ||
+    	$ZSH_VERSION == 4.<3->* ||
+    	$ZSH_VERSION == <5->* ]]; then
+    	# set feature which appeared first in 4.3.6
+    else
+    	print "Version control prompt info available only as of zsh 4.3.6; you have $ZSH_VERSION";
+    fi
+	
 	# set some colors
 	for COLOR in RED GREEN YELLOW WHITE BLACK CYAN; do
 	    eval PR_$COLOR='%{$fg[${(L)COLOR}]%}'         
@@ -85,13 +93,20 @@ function precmd {
     (( TERMWIDTH = ${COLUMNS} - 1 ))
 		
 	local git git_no_color git_expanded git_expanded_no_color
-	vcs_info 'prompt'
-	if [[ $vcs_info_msg_0_ != "" ]]; then
-		git=' ($vcs_info_msg_0_) ${PR_CYAN}$vcs_info_msg_1_${PR_RESET}'
-		git_no_color=' ($vcs_info_msg_0_) $vcs_info_msg_1_'
 	
-		git_expanded=$(print -P "$git")
-		git_expanded_no_color=$(print -P "$git_no_color")
+	if [[ $ZSH_VERSION == 4.3.<6->* ||
+        $ZSH_VERSION == 4.<3->* ||
+        $ZSH_VERSION == <5->* ]]; then
+    	# set feature which appeared first in 4.3.6
+ 	
+		vcs_info 'prompt'
+		if [[ $vcs_info_msg_0_ != "" ]]; then
+			git=' ($vcs_info_msg_0_) ${PR_CYAN}$vcs_info_msg_1_${PR_RESET}'
+			git_no_color=' ($vcs_info_msg_0_) $vcs_info_msg_1_'
+		
+			git_expanded=$(print -P "$git")
+			git_expanded_no_color=$(print -P "$git_no_color")
+		fi
 	fi
 	
 	base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%([FK]{.*?}|k)//g")
