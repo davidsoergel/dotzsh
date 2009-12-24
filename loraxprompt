@@ -25,8 +25,10 @@ loraxprompt () {
     	$ZSH_VERSION == 4.<4->* ||
     	$ZSH_VERSION == <5->* ]]; then
     	# set feature which appeared first in 4.3.6
+		vcs_info_exists=1
     else
     	print "Version control prompt info available only as of zsh 4.3.6; you have $ZSH_VERSION";
+		vcs_info_exists=0
     fi
 	
 	# set some colors
@@ -80,8 +82,8 @@ loraxprompt () {
   prompt_adam1_color3=${3:-'green'}
 
 	# for older versions
-	base_prompt="%{$bg_no_bold[$prompt_adam1_color1]%}%n@%m%{$reset_color%} "
-	post_prompt="%{$reset_color%}"
+	base_prompt="%{$bg_no_bold[$prompt_adam1_color1]%}%n@%m$PR_RESET "
+	post_prompt="$PR_RESET"
 
 	# these work only in zsh 4.3.x?
 	#base_prompt="%K{blue}%n@%m%k "
@@ -110,9 +112,7 @@ function precmd {
 		
 	local git git_no_color git_expanded git_expanded_no_color
 	
-	if [[ $ZSH_VERSION == 4.3.<6->* ||
-        $ZSH_VERSION == 4.<3->* ||
-        $ZSH_VERSION == <5->* ]]; then
+	if [[ $vcs_info_exists == 1 ]]; then
 
     	# set feature which appeared first in 4.3.6
  	
@@ -145,7 +145,7 @@ function precmd {
     fi
 
 	#path_prompt="%{$fg_bold[$prompt_adam1_color3]%}%${space_left}<...<%~$prompt_newline%{$fg_bold_white%}"
-	path_prompt="%{$fg_bold[$prompt_adam1_color3]%}%$PR_PWDLEN<...<%~%<<%{$fg_bold_white%}"
+	path_prompt="%{$fg_bold[$prompt_adam1_color3]%}%$PR_PWDLEN<...<%~%<<${PR_RESET}"
 
 	#path_prompt='%B%F{green}%$PR_PWDLEN<...<%~%<<${PR_RESET}'
 	
