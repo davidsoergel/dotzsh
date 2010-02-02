@@ -20,6 +20,7 @@ alias vi=vim
 alias ls-al='ls -al'
 alias la='ls -al'
 alias h='history'
+alias mkdir='nocorrect mkdir'
 
 # Global aliases
 alias -g L='| less'
