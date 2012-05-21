@@ -8,7 +8,7 @@ case $TERM in
     xterm*)
     	#print -Pn "\e]0;%n@%m: %~\a"
 	print -Pn "\e]0;%m: %~\a"
-	t() { DSTASK=$1 ; print -Pn "\e]0;$DSTASK %m: %~\a" } 
+	t() { DSTASK="$*" ; print -Pn "\e]0;$DSTASK %m: %~\a" } 
         chpwd() {print -Pn "\e]0;$DSTASK %m: %~\a"}
         ;;
 esac
