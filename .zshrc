@@ -6,8 +6,10 @@ fpath=($ZDOTDIR $fpath)
 # Window Titles
 case $TERM in
     xterm*)
-    	print -Pn "\e]0;%n@%m: %~\a"
-        chpwd() {print -Pn "\e]0;%n@%m: %~\a"}
+    	#print -Pn "\e]0;%n@%m: %~\a"
+	print -Pn "\e]0;%m: %~\a"
+	t() { DSTASK=$1 ; print -Pn "\e]0;$DSTASK %m: %~\a" } 
+        chpwd() {print -Pn "\e]0;$DSTASK %m: %~\a"}
         ;;
 esac
 
@@ -16,9 +18,9 @@ calc(){ awk "BEGIN{ print $* }" ;}
 
 
 # Command Aliases
-alias vi=vim
-alias ls-al='ls -al'
-alias la='ls -al'
+#alias vi=vim
+alias ls-al='ls -alh'
+alias la='ls -alh'
 alias h='history'
 alias mkdir='nocorrect mkdir'
 
@@ -27,6 +29,8 @@ alias -g L='| less'
 
 # SSH Aliases
 alias lorax='ssh -A lorax@lorax.org; chpwd'
+alias blake='ssh soergel@blake.cs.umass.edu; chpwd'
+alias emerge='ssh emerge; chpwd'
 alias two='ssh -A lorax@two.lorax.org; chpwd'
 alias brass='ssh -A soergel@brass.berkeley.edu; chpwd'
 alias orchid='ssh -A soergel@orchid.berkeley.edu; chpwd'   
