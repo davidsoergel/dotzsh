@@ -216,10 +216,26 @@ zwget() {
     ztcp -c $fd
 }
 
+function laststatus { return $? }
+# URL encode something and print it.
+
+urlencode() {
+    setopt localoptions extendedglob
+    input=( ${(s::)1} )
+    print ${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-])/%${(l:2::0:)$(([##16]#match))}}
+}
+
+#function url-encode; {
+#        setopt extendedglob
+#        echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
+#}
+#
 prowl() {
+    if laststatus; then result=OK; else result=ERROR; fi
     description=`tail -10 <&0`
+    descriptionu=`urlencode "$description"`
     host=`hostname`
-    zwget "http://prowlapp.com/publicapi/add?apikey=$PROWLKEY&application=$host&event=$1&description=$description&priority=$2"
+    zwget "http://prowlapp.com/publicapi/add?apikey=$PROWLKEY&application=$host&event=$1%20%3A%20$result&description=$descriptionu&priority=$2"
 }
 
 
