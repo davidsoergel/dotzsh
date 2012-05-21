@@ -192,6 +192,36 @@ alias which >&/dev/null && unalias which
 alias run-help >&/dev/null && unalias run-help
 autoload run-help
 
+# zwget from http://www.zsh.org/mla/users/2011/msg00742.html
+zwget() {
+    emulate -LR zsh
+    local scheme empty server resource fd headerline
+    IFS=/ read scheme empty server resource <<<$1
+    case $scheme in
+    (https:) print -u2 SSL unsupported, falling back on HTTP ;&
+    (http:)
+        zmodload zsh/net/tcp
+        ztcp $server 80 && fd=$REPLY || return 1;;
+    (*) print -u2 $scheme unsupported; return 1;;
+    esac
+    print -l -u$fd -- \
+        "GET /$resource HTTP/1.0"$'\015' \
+        "Host: $server"$'\015' \
+        'Connection: close'$'\015' $'\015'
+    while IFS= read -u $fd -r headerline
+    do
+	[[ $headerline == $'\015' ]] && break
+    done
+    while IFS= read -u $fd -r -e; do :; done
+    ztcp -c $fd
+}
+
+prowl() {
+    description=`tail -10 <&0`
+    host=`hostname`
+    zwget "http://prowlapp.com/publicapi/add?apikey=$PROWLKEY&application=$host&event=$1&description=$description&priority=$2"
+}
+
 
 # local customizations
 source ~/.zshrc.local
