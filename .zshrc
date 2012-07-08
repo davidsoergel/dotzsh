@@ -32,23 +32,12 @@ alias fixssh='source $HOME/bin/fixssh'
 alias -g L='| less'
 
 # SSH Aliases
-alias lorax='ssh -A lorax@lorax.org; chpwd'
-alias blake='ssh soergel@blake.cs.umass.edu; chpwd'
+alias lorax='ssh lorax; chpwd'
+alias blake='ssh blake; chpwd'
 alias emerge='ssh emerge; chpwd'
-alias two='ssh -A lorax@two.lorax.org; chpwd'
-alias brass='ssh -A soergel@brass.berkeley.edu; chpwd'
-alias orchid='ssh -A soergel@orchid.berkeley.edu; chpwd'   
-alias weed='ssh -A soergel@weed.berkeley.edu; chpwd'   
-alias heart='ssh -A soergel@heart.berkeley.edu; chpwd'   
-alias mako='ssh soergel@mako.berkeley.edu; chpwd'
-alias ikelite='ssh -A dsoergel@ikelite.rocksclusters.org'
-alias ikelitex='ssh -c arcfour,blowfish-cbc -XC dsoergel@ikelite.rocksclusters.org'
-alias dev='ssh -A dev.davidsoergel.com; chpwd'
-#alias korn='ssh -t -A soergel@brass.berkeley.edu ssh -t -A korn; chpwd'  
-#alias kornx='ssh -t -A -X soergel@brass.berkeley.edu ssh -t -A -X korn; chpwd'
-#alias weed='ssh -t -A soergel@brass.berkeley.edu ssh -t -A weed; chpwd'  
-#alias weedx='ssh -t -A -c arcfour,blowfish-cbc -XC soergel@brass.berkeley.edu ssh -t -A -c arcfour,blowfish-cbc -XC weed; chpwd'
-
+alias dev='ssh dev.davidsoergel.com; chpwd'
+alias loraxroot='ssh root@lorax.org; chpwd'
+alias devroot='ssh root@dev.davidsoergel.com; chpwd'
 
 # Setup History
 HISTSIZE=1000
@@ -226,6 +215,8 @@ urlencode() {
     input=( ${(s::)1} )
     print ${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-])/%${(l:2::0:)$(([##16]#match))}}
 }
+
+export PROWLKEY=1dc0ee00c8b90e021ec55eeb20bbb7e8e824606f
 
 prowl() {
     if laststatus; then result=OK; else result=ERROR; fi
