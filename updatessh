@@ -5,7 +5,7 @@
 if [ -n "$TMUX" ]
 then
     rm ~/bin/fixssh
-    #echo "" >~/bin/fixssh
+    echo "" >~/bin/fixssh
 
     tmux show-environment | grep -E '^SSH' | while read line
     do
