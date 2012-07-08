@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# -*- mode: shell-script -*-
+
+if [ -n "${TMUX+x}" ]
+then
+    echo "" >~/bin/fixssh
+
+    tmux show-environment | grep -E '^SSH' | while read line
+    do
+        var_name=`echo $line | cut -f1 -d=`
+        var_value=`echo $line | cut -f2 -d=`
+        echo "export ${var_name}=\"${var_value}\"" >>~/bin/fixssh
+    done
+    . ~/bin/fixssh
+fi
+
+#http://alexras.info/2012/03/03/esoteric-tip-7-ssh-agent-forwarding-and-screen-sessions/

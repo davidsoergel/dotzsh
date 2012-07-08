@@ -26,6 +26,8 @@ alias la='ls -alh'
 alias h='history'
 alias mkdir='nocorrect mkdir'
 
+alias fixssh='source $HOME/bin/fixssh'
+
 # Global aliases
 alias -g L='| less'
 
@@ -217,19 +219,14 @@ zwget() {
 }
 
 function laststatus { return $? }
-# URL encode something and print it.
 
+#http://www.zsh.org/mla/users/2008/msg01153.html
 urlencode() {
     setopt localoptions extendedglob
     input=( ${(s::)1} )
     print ${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-])/%${(l:2::0:)$(([##16]#match))}}
 }
 
-#function url-encode; {
-#        setopt extendedglob
-#        echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
-#}
-#
 prowl() {
     if laststatus; then result=OK; else result=ERROR; fi
     description=`tail -10 <&0`
