@@ -2,9 +2,10 @@
 
 # -*- mode: shell-script -*-
 
-if [ -n "${TMUX+x}" ]
+if [ -n "$TMUX" ]
 then
-    echo "" >~/bin/fixssh
+    rm ~/bin/fixssh
+    #echo "" >~/bin/fixssh
 
     tmux show-environment | grep -E '^SSH' | while read line
     do
