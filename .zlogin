@@ -5,4 +5,8 @@ if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
     trap "if [[ -n $SSH_AGENT_PID ]] then; kill $SSH_AGENT_PID; fi" 0
 fi
 
+cd ~/.zsh
+hg pull; hg update
+cd ~
+
 source ~/.zlogin.local

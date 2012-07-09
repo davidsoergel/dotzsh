@@ -216,6 +216,7 @@ urlencode() {
     print ${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-])/%${(l:2::0:)$(([##16]#match))}}
 }
 
+# previously I set this in .zshrc.local, presumably because I thought this repo might be public.  But it isn't, right?  And automatically propagating it is much more convenient.
 export PROWLKEY=1dc0ee00c8b90e021ec55eeb20bbb7e8e824606f
 
 prowl() {
@@ -226,6 +227,7 @@ prowl() {
     zwget "http://prowlapp.com/publicapi/add?apikey=$PROWLKEY&application=$host&event=$1%20%3A%20$result&description=$descriptionu&priority=$2"
 }
 
+ssh-add -l
 
 # local customizations
 source ~/.zshrc.local
