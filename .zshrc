@@ -31,6 +31,11 @@ alias mkdir='nocorrect mkdir'
 # Global aliases
 alias -g L='| less'
 
+lessc() {
+# http://unix.stackexchange.com/questions/29023/how-to-display-tsv-csv-in-console-when-empty-cells-are-missed-by-column-t
+sed ':x s/\(^\|\t\)\t/\1 \t/; t x' < $1 | column -t -s $'\t' | less
+}
+
 # SSH Aliases
 alias lorax='ssh lorax; chpwd'
 alias blake='ssh blake; chpwd'

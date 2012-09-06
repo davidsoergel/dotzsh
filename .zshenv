@@ -20,3 +20,5 @@ export VISUAL=vim
 export CVS_RSH=ssh
 
 export LSCOLORS=ExFxCxDxBxEgEdAbAgAcEh
+
+source ~/.zshenv.local
