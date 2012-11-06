@@ -241,3 +241,6 @@ echo
 
 # local customizations
 source ~/.zshrc.local
+
+
+echo -----------------------------------------------

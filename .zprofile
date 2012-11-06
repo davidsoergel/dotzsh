@@ -4,6 +4,7 @@
 echo ---------- Starting SSH agent ---------- 
 SSHAGENT=/usr/bin/ssh-agent
 SSHAGENTARGS="-s -t 7200"
+echo existing SSH_AUTH_SOCK: $SSH_AUTH_SOCK
 if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
     SSHAGENTVARS=`$SSHAGENT $SSHAGENTARGS`
     echo $SSHAGENTVARS
@@ -18,7 +19,5 @@ cd ~/.zsh
 hg pull; hg update
 cd ~
 echo
-
-echo =============================================== 
 
 source .zprofile.local
