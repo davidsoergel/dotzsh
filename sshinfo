@@ -1,0 +1,24 @@
+#!/bin/sh
+
+echo ---------- Active environment variables ---------- 
+echo SSH_ASKPASS:      $SSH_ASKPASS
+echo SSH_AUTH_SOCK:    $SSH_AUTH_SOCK
+echo SSH_AGENT_PID:    $SSH_AGENT_PID
+echo SSH_CONNECTION:   $SSH_CONNECTION
+
+echo ---------- Current TMUX session ---------- 
+echo TMUX:             $TMUX
+
+echo ---------- Current TMUX processes ---------- 
+ps -ef | grep tmux
+
+if [ -n "$TMUX" ]
+then
+    echo ----------TMUX environment variables ---------- 
+    #echo tmux show-environment \| grep -E '^SSH' :
+    tmux show-environment | grep -E '^SSH'
+fi
+
+echo ------------------ SSH Keys ------------------- 
+ssh-add -l
+echo

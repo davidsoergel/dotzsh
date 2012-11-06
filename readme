@@ -2,7 +2,7 @@
 Lorax zsh config files
 ======================
 
-.zshrc files should generally go in .zsh, which is in mercurial.  The home dir should contain only the stub .zshenv (see .zshenv.home) to set $ZDOTDIR, and .zshrc.local.
+.zshrc files should generally go in .zsh, which is in mercurial.  The home dir should contain only the stub .zshenv (see .zshenv.home) to set $ZDOTDIR, .zshrc.local, and .zshenv.local.
 
 I originally had separate branches for different machines, in order to store the .zshrc.local files too.  This turned out to be too much hassle, so never mind that.
 
@@ -25,6 +25,7 @@ Elysium (local laptop)
 ----------------------
 
 .zshenv
+.zshenv.local
 .zprofile
 .zprofile.local
 .zshrc
@@ -36,6 +37,7 @@ Lorax (tmux host)
 -----------------
 
 .zshenv
+.zshenv.local
 .zprofile
 .zprofile.local -> .zprofile.tmux
 .zshrc
@@ -48,6 +50,7 @@ Lorax (tmux subshell)
 ---------------------
 
 .zshenv
+.zshenv.local
 .zshrc
 .zshrc.local -> .zshrc.tmux
 

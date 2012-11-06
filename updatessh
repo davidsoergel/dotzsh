@@ -1,19 +1,36 @@
+# this must be run via source or . so that the environment variable settings will work
 #!/bin/bash
 
 # -*- mode: shell-script -*-
 
 if [ -n "$TMUX" ]
 then
-    rm ~/bin/fixssh
-    echo "" >~/bin/fixssh
+    #rm ~/bin/fixssh
+    #echo "" >~/bin/fixssh
 
     tmux show-environment | grep -E '^SSH' | while read line
     do
         var_name=`echo $line | cut -f1 -d=`
         var_value=`echo $line | cut -f2 -d=`
-        echo "export ${var_name}=\"${var_value}\"" >>~/bin/fixssh
+        #echo "export ${var_name}=\"${var_value}\"" >>~/bin/fixssh
+        export ${var_name}="${var_value}" 
     done
-    . ~/bin/fixssh
+    #. ~/bin/fixssh
 fi
 
 #http://alexras.info/2012/03/03/esoteric-tip-7-ssh-agent-forwarding-and-screen-sessions/
+
+
+# obsolete but interesting:
+
+#!/bin/sh
+#SSHVARS="SSH_CLIENT SSH_TTY SSH_AUTH_SOCK SSH_CONNECTION DISPLAY"
+#
+#for x in ${SSHVARS} ; do
+#    (eval echo $x=\$$x) | sed  's/=/="/
+#                                s/$/"/
+#                                s/^/export /'
+#done 1>$HOME/bin/fixssh
+
+# see http://www.deadman.org/sshscreen.php
+# and http://alexras.info/2012/03/03/esoteric-tip-7-ssh-agent-forwarding-and-screen-sessions/
