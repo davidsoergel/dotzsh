@@ -232,8 +232,8 @@ prowl() {
     zwget "http://prowlapp.com/publicapi/add?apikey=$PROWLKEY&application=$host&event=$1%20%3A%20$result&description=$descriptionu&priority=$2"
 }
 
-alias fixssh=source ~/.zsh/updatessh
-alias sshinfo=source ~/.zsh/sshinfo
+alias fixssh='source ~/.zsh/updatessh'
+alias sshinfo='source ~/.zsh/sshinfo'
 
 echo ------------------ SSH Keys ------------------- 
 ssh-add -l
