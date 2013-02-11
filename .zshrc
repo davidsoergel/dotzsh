@@ -181,10 +181,15 @@ setopt                       \
      NO_verbose                \
         zle                  
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
-ZSH_HIGHLIGHT_STYLES[globbing]=none
+
+autoload -U is-at-least
+if is-at-least 4.3.9; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+  ZSH_HIGHLIGHT_STYLES[globbing]=none
    
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh    
+  source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh    
+fi
+
 source ~/.zsh/z/z.sh    
         
 # reverse unwanted aliasing of `which' by distribution startup
