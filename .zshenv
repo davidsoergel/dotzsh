@@ -16,6 +16,7 @@ ld_library_path=( ~/lib $ld_library_path)
 # Some environment variables
 export LESS=-X
 export CLICOLOR=1
+export EDITOR=vim
 export VISUAL=vim
 export CVS_RSH=ssh
 

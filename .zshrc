@@ -1,3 +1,8 @@
+#key bindings
+bindkey -v
+
+
+
 # functions are in ~/loraxhome
 # (or ~/loraxhome-edit for testing)
 
@@ -45,8 +50,8 @@ alias loraxroot='ssh root@lorax.org; chpwd'
 alias devroot='ssh root@dev.davidsoergel.com; chpwd'
 
 # Setup History
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.zshhistory
 
 
@@ -175,7 +180,9 @@ setopt                       \
         unset                  \
      NO_verbose                \
         zle                  
-        
+
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh    
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh    
         
 # reverse unwanted aliasing of `which' by distribution startup
 # files (e.g. /etc/profile.d/which*.sh); zsh's 'which' is perfectly
