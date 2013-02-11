@@ -1,8 +1,6 @@
 #key bindings
 bindkey -v
 
-
-
 # functions are in ~/loraxhome
 # (or ~/loraxhome-edit for testing)
 
@@ -28,7 +26,9 @@ calc(){ awk "BEGIN{ print $* }" ;}
 #alias vi=vim
 alias ls-al='ls -alh'
 alias la='ls -alh'
-alias h='history'
+alias history='fc -l -f -i 1'
+alias h='fc -l -f -i 1'
+alias h='fc -l -f -i 1 | grep $1'
 alias mkdir='nocorrect mkdir'
 
 #alias fixssh='source $HOME/bin/fixssh'
@@ -181,8 +181,11 @@ setopt                       \
      NO_verbose                \
         zle                  
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh    
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+ZSH_HIGHLIGHT_STYLES[globbing]=none
+   
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh    
+source ~/.zsh/z/z.sh    
         
 # reverse unwanted aliasing of `which' by distribution startup
 # files (e.g. /etc/profile.d/which*.sh); zsh's 'which' is perfectly
