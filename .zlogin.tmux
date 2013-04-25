@@ -4,6 +4,6 @@
 #if [ ! -n "$TMUX" ]
 #then
 
-tmux -C attach
+tmux -CC attach
 
 #fi
