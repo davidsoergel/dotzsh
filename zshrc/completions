@@ -1,0 +1,3 @@
+# Completions
+autoload -U compinit
+compinit -C # don't perform security check

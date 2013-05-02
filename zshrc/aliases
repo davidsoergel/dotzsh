@@ -1,0 +1,14 @@
+
+# Command Aliases
+#alias vi=vim
+alias ls-al='ls -alh'
+alias la='ls -alh'
+alias history='fc -l -f -i 1'
+alias h='fc -l -f -i 1'
+alias h='fc -l -f -i 1 | grep $1'
+alias mkdir='nocorrect mkdir'
+
+#alias fixssh='source $HOME/bin/fixssh'
+
+# Global aliases
+alias -g L='| less'

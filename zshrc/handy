@@ -1,0 +1,20 @@
+
+# Calculator
+calc(){ awk "BEGIN{ print $* }" ;}
+
+
+lessc() {
+# http://unix.stackexchange.com/questions/29023/how-to-display-tsv-csv-in-console-when-empty-cells-are-missed-by-column-t
+sed ':x s/\(^\|\t\)\t/\1 \t/; t x' < $1 | column -t -s $'\t' | less
+}
+
+
+autoload -U is-at-least
+if is-at-least 4.3.9; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+  ZSH_HIGHLIGHT_STYLES[globbing]=none
+   
+  source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh    
+fi
+
+source ~/.zsh/z/z.sh    

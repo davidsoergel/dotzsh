@@ -1,0 +1,9 @@
+
+
+# SSH Aliases
+alias lorax='ssh lorax; chpwd'
+alias blake='ssh blake; chpwd'
+alias emerge='ssh emerge; chpwd'
+alias dev='ssh dev.davidsoergel.com; chpwd'
+alias loraxroot='ssh root@lorax.org; chpwd'
+alias devroot='ssh root@dev.davidsoergel.com; chpwd'

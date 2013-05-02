@@ -1,0 +1,10 @@
+
+
+# Prompts
+#autoload -U promptinit
+#promptinit
+#prompt adam1
+autoload loraxprompt
+loraxprompt
+#source ~/loraxhome-edit/adam1-vcsinfo
+

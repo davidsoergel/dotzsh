@@ -1,0 +1,12 @@
+alias fixssh='source ~/.zsh/updatessh'
+alias sshinfo='source ~/.zsh/sshinfo'
+
+echo ------------------ SSH Keys ------------------- 
+ssh-add -l
+echo
+
+# local customizations
+source ~/.zshrc.local
+
+
+echo -----------------------------------------------
