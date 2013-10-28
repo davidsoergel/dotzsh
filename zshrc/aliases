@@ -8,6 +8,8 @@ alias h='fc -l -f -i 1'
 alias h='fc -l -f -i 1 | grep $1'
 alias mkdir='nocorrect mkdir'
 
+alias rmate='~/.zsh/rmate'
+
 #alias fixssh='source $HOME/bin/fixssh'
 
 # Global aliases
