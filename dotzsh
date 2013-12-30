@@ -1,0 +1,8 @@
+echo ---------- Checking for .zsh updates ---------- 
+cd ~/.zsh
+# don't do this automatically; security hole!
+# but this script must be triggered manually.
+git pull
+#git fetch --dry-run
+cd ~
+echo
