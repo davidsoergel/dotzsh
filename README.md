@@ -10,11 +10,12 @@ Lorax zsh config files
 
 I originally had separate branches for different machines, in order to store the .zshrc.local files too.  This turned out to be too much hassle, so never mind that.
 
-The order of loading is: 
-.zshenv
-.zprofile (login shells)
-.zshrc
-.zlogin (login shells)
+The order of loading is:
+
+ * .zshenv
+ * .zprofile (login shells)
+ * .zshrc
+ * .zlogin (login shells)
 
 Tmux
 ----
@@ -27,33 +28,33 @@ So the upshot is:
 
 ### Elysium (local laptop)
 
-.zshenv
-.zshenv.local
-.zprofile
-.zprofile.local
-.zshrc
-.zshrc.local
-.zlogin
-.zlogin.local
+ * .zshenv
+ * .zshenv.local
+ * .zprofile
+ * .zprofile.local
+ * .zshrc
+ * .zshrc.local
+ * .zlogin
+ * .zlogin.local
 
 ### Lorax (tmux host)
 
-.zshenv
-.zshenv.local
-.zprofile
-.zprofile.local -> .zprofile.tmux
-.zshrc
-.zshrc.local -> .zshrc.tmux
-.zlogin
-.zlogin.local -> .zlogin.tmux
+ * .zshenv
+ * .zshenv.local
+ * .zprofile
+ * .zprofile.local -> .zprofile.tmux
+ * .zshrc
+ * .zshrc.local -> .zshrc.tmux
+ * .zlogin
+ * .zlogin.local -> .zlogin.tmux
 
 
 ### Lorax (tmux subshell)
 
-.zshenv
-.zshenv.local
-.zshrc
-.zshrc.local -> .zshrc.tmux
+ * .zshenv
+ * .zshenv.local
+ * .zshrc
+ * .zshrc.local -> .zshrc.tmux
 
 
 SSH files
