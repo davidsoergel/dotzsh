@@ -14,10 +14,13 @@ if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
 fi
 echo
 
-echo ---------- Checking for .zsh updates ---------- 
-cd ~/.zsh
-hg pull; hg update
-cd ~
-echo
+# don't do this at all; require manual trigger via "dotzsh"
+# echo ---------- Checking for .zsh updates ---------- 
+# cd ~/.zsh
+# # don't do this: security hole
+# # git pull
+# git fetch --dry-run
+# cd ~
+# echo
 
 source .zprofile.local

@@ -12,5 +12,7 @@ alias rmate='~/.zsh/rmate'
 
 #alias fixssh='source $HOME/bin/fixssh'
 
+alias dotzsh='~/.zsh/dotzsh'
+
 # Global aliases
 alias -g L='| less'
