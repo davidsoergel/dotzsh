@@ -8,8 +8,8 @@ source ~/.zsh/zshrc/prowl
 source ~/.zsh/zshrc/handy
 source ~/.zsh/zshrc/zwget
 source ~/.zsh/zshrc/aliases
-# source ~/.zsh/zshrc/sshaliases
-# source ~/.zsh/zshrc/sshagent
+source ~/.zsh/zshrc/sshaliases
+source ~/.zsh/zshrc/sshagent
 source ~/.zsh/zshrc/gcloud
 
 # local customizations

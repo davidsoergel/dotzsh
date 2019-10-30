@@ -30,6 +30,4 @@ if is-at-least 4.3.9; then
   fi
 fi
 
-source ~/.zsh/z/z.sh 
-   
-export LESS=eFRX
+source ~/.zsh/z/z.sh    
