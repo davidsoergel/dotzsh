@@ -11,10 +11,6 @@ source ~/.zsh/zshrc/aliases
 source ~/.zsh/zshrc/sshaliases
 source ~/.zsh/zshrc/sshagent
 
-
-
-
-
-
-
+# local customizations
+source ~/.zshrc.local
 
