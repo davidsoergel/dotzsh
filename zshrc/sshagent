@@ -1,12 +1,11 @@
-alias fixssh='source ~/.zsh/updatessh'
-alias sshinfo='source ~/.zsh/sshinfo'
+if [ -v SSH_AGENT_ENABLED ]; then
+  alias fixssh='source ~/.zsh/updatessh'
+  alias sshinfo='source ~/.zsh/sshinfo'
 
-echo ------------------ SSH Keys ------------------- 
-ssh-add -l
-echo
-
-# local customizations
-source ~/.zshrc.local
-
-
-echo -----------------------------------------------
+  source ~/.sshkeys.local
+  echo
+  echo ------------------ SSH Keys ------------------- 
+  ssh-add -l
+  echo
+  echo -----------------------------------------------
+fi

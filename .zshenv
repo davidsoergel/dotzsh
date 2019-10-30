@@ -5,7 +5,7 @@ umask 022
 
 # Path
 typeset -U path # No duplicates
-path=( ~/bin /usr/local/bin /usr/local/sbin /usr/sbin /sbin /usr/local/maven/bin $path )
+path=( ~/bin /usr/local/bin /usr/local/sbin /usr/sbin /sbin $path )
 
 typeset -U manpath # No duplicates
 
@@ -14,7 +14,7 @@ typeset -U ld_library_path
 ld_library_path=( ~/lib $ld_library_path)
 
 # Some environment variables
-export LESS=-X
+export LESS=eFRXX
 export CLICOLOR=1
 export EDITOR=vim
 export VISUAL=vim

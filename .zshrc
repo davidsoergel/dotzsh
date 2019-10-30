@@ -12,10 +12,6 @@ source ~/.zsh/zshrc/aliases
 # source ~/.zsh/zshrc/sshagent
 source ~/.zsh/zshrc/gcloud
 
-
-
-
-
-
-
+# local customizations
+source ~/.zshrc.local
 
