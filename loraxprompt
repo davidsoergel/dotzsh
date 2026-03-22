@@ -84,11 +84,7 @@ loraxprompt () {
 	
 	
 	# new versions
-<<<<<<< HEAD
 	#base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%([FK]\{.*?}|k)//g")
-=======
-	#base_prompt_no_color=$(echo "$base_prompt" | perl -pe "s/%([FK]{.*?}|k)//g")
->>>>>>> 898f7ef27c582d4a7ebb7a33706871fc088b5d0c
 	post_prompt_no_color=$(echo "$post_prompt" | perl -pe "s/%([FK]\{.*?}|k)//g")
 	
 	# old versions
