@@ -21,8 +21,6 @@ esac
 
 # Variables used by zsh
 LISTMAX=1000  # "Never" ask
-LOGCHECK=60
-WATCHFMT="[%B%t%b] %B%n%b has %a %B%l%b from %B%M%b"
 TMOUT=0
 MAILCHECK=0
 
@@ -54,7 +52,6 @@ setopt                       \
         complete_aliases       \
         complete_in_word       \
      NO_correct                \
-        correct_all            \
      NO_csh_junkie_history     \
      NO_csh_junkie_loops       \
      NO_csh_junkie_quotes      \
@@ -84,7 +81,6 @@ setopt                       \
         hist_reduce_blanks     \
      NO_ignore_braces          \
      NO_ignore_eof             \
-        inc_append_history     \
         interactive_comments   \
      NO_ksh_glob               \
      NO_list_ambiguous         \
@@ -120,7 +116,7 @@ setopt                       \
      NO_sh_file_expansion      \
         sh_option_letters      \
         short_loops            \
-        sh_word_split          \
+     NO_sh_word_split          \
      NO_single_line_zle        \
      NO_sun_keyboard_hack      \
         unset                  \

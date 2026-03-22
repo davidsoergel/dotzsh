@@ -19,8 +19,9 @@ zstyle ':completion:*' verbose true
 zstyle :compinstall filename '/Users/lorax/.zsh/zshrc/completions'
 
 autoload -Uz compinit
-compinit
-
-# Completions
-#autoload -U compinit
-#compinit -C # don't perform security check
+# Only do full security check if dump is older than 24 hours
+if [[ -n ~/.zsh/.zcompdump(#qN.mh+24) ]]; then
+    compinit -d ~/.zsh/.zcompdump
+else
+    compinit -C -d ~/.zsh/.zcompdump
+fi

@@ -57,6 +57,20 @@ So the upshot is:
  * .zshrc.local -> .zshrc.tmux
 
 
+Homebrew
+--------
+
+Homebrew is initialized in `.zshenv` so it's available in all shell types (interactive, non-interactive, scripts). The init block handles three locations in order:
+
+ * `/opt/homebrew` — Apple Silicon Mac
+ * `/usr/local` — Intel Mac
+ * `/home/linuxbrew/.linuxbrew` — Linux
+
+On macOS, zsh plugins (`zsh-syntax-highlighting`, `zsh-history-substring-search`) and tools (`fnm`, `zoxide`) are expected to be installed via Homebrew. `zshrc/handy` and `zshrc/fnm` guard their setup with `$+commands[brew]` / `$+commands[fnm]` / `$+commands[zoxide]` so the config degrades gracefully on machines where they aren't present.
+
+On Linux without Homebrew, those plugins won't load. To enable them, install via your distro's package manager and source the plugin files from `.zshrc.local` on that machine.
+
+
 SSH files
 ---------
 

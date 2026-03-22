@@ -1,3 +1,0 @@
-# fnm (Fast Node Manager) -- replaces nvm
-# Handles .nvmrc auto-switching via --use-on-cd
-eval "$(fnm env --use-on-cd --shell zsh)"

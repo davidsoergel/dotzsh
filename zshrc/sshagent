@@ -1,11 +1,11 @@
-if [ -v SSH_AGENT_ENABLED ]; then
-  alias fixssh='source ~/.zsh/updatessh'
-  alias sshinfo='source ~/.zsh/sshinfo'
+alias fixssh='source ~/.zsh/updatessh'
+alias sshinfo='source ~/.zsh/sshinfo'
 
-  source ~/.sshkeys.local
-  echo
-  echo ------------------ SSH Keys ------------------- 
-  ssh-add -l
-  echo
-  echo -----------------------------------------------
+if [[ $OSX != 1 ]] && [ -v SSH_AGENT_ENABLED ]; then
+    source ~/.sshkeys.local
 fi
+echo
+echo ------------------ SSH Keys -------------------
+ssh-add -l
+echo
+echo -----------------------------------------------

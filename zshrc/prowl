@@ -1,6 +1,5 @@
 function laststatus { return $? }
 
-#http://www.zsh.org/mla/users/2008/msg01153.html
 urlencode() {
     setopt localoptions extendedglob
     input=( ${(s::)1} )
@@ -9,8 +8,8 @@ urlencode() {
 
 prowl() {
     if laststatus; then result=OK; else result=ERROR; fi
-    description=`tail -10 <&0`
-    descriptionu=`urlencode "$description"`
-    host=`hostname`
-    zwget "http://prowlapp.com/publicapi/add?apikey=$PROWLKEY&application=$host&event=$1%20%3A%20$result&description=$descriptionu&priority=$2"
+    description=$(tail -10 <&0)
+    descriptionu=$(urlencode "$description")
+    host=$(hostname)
+    curl -s "https://prowlapp.com/publicapi/add?apikey=$PROWLKEY&application=$host&event=$1%20%3A%20$result&description=$descriptionu&priority=$2" > /dev/null
 }

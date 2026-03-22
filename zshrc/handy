@@ -2,32 +2,24 @@
 # Calculator
 calc(){ awk "BEGIN{ print $* }" ;}
 
+if (( $+commands[brew] )); then
+    _brew_prefix=$(brew --prefix)
+    source $_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ZSH_HIGHLIGHT_STYLES[globbing]=none
+    source $_brew_prefix/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+    unset _brew_prefix
 
-# lessc() {
-# # http://unix.stackexchange.com/questions/29023/how-to-display-tsv-csv-in-console-when-empty-cells-are-missed-by-column-t
-# sed ':x s/\(^\|\t\)\t/\1 \t/; t x' < $1 | column -t -s $'\t' | less
-# }
-
-
-autoload -U is-at-least
-if is-at-least 4.3.9; then
-  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
-  ZSH_HIGHLIGHT_STYLES[globbing]=none
-   
-  source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh  
-  
-  # bind UP and DOWN arrow keys
-  
-  if $LINUX; then
-      zmodload zsh/terminfo
-      bindkey "$terminfo[kcuu1]" history-substring-search-up
-      bindkey "$terminfo[kcud1]" history-substring-search-down
-  fi
-  
-  if $OSX; then
-      bindkey '^[[A' history-substring-search-up
-      bindkey '^[[B' history-substring-search-down
-  fi
+    # bind UP and DOWN arrow keys for history-substring-search
+    if [[ $LINUX == 1 ]]; then
+        zmodload zsh/terminfo
+        bindkey "$terminfo[kcuu1]" history-substring-search-up
+        bindkey "$terminfo[kcud1]" history-substring-search-down
+    else
+        bindkey '^[[A' history-substring-search-up
+        bindkey '^[[B' history-substring-search-down
+    fi
 fi
 
-source ~/.zsh/z/z.sh    
+if (( $+commands[zoxide] )); then
+    eval "$(zoxide init zsh)"
+fi

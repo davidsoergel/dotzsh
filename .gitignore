@@ -1,6 +1,11 @@
 syntax: glob
 
 
+## Secrets
+*.secrets
+.zshenv.secrets
+
+
 ## General temp files
 
 *.DS_Store
