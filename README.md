@@ -60,13 +60,24 @@ So the upshot is:
 Homebrew
 --------
 
-Homebrew is initialized in `.zshenv` so it's available in all shell types (interactive, non-interactive, scripts). The init block handles three locations in order:
+Homebrew's `shellenv` is applied by `brew-shellenv`, which is sourced **twice**, by design:
+
+ * from `.zshenv`, so the prefix is on `PATH` in every shell type (interactive, non-interactive, scripts);
+ * again from `.zprofile`, because on macOS `/etc/zprofile` runs `path_helper` *after* `.zshenv`. That rebuilds `PATH` from `/etc/paths` and `/etc/paths.d`, demoting the Homebrew prefix behind `/usr/bin`. `.zprofile` runs after `/etc/zprofile`, so re-asserting there wins.
+
+Without the second pass, brew-installed tools silently lose to the system ones — on this setup `openssl` was resolving to `/usr/bin/openssl`, which is LibreSSL, not Homebrew's OpenSSL 3.
+
+Sourcing it twice needs a dedupe, and `typeset -U path` does **not** provide one here: `brew shellenv` assigns to the scalar `PATH`, while zsh enforces `-U` only on assignment to the tied array `path`. `brew-shellenv` therefore re-assigns the array after the eval, which collapses the stale entry and keeps the newly prepended one.
+
+The prefix is auto-detected, in order:
 
  * `/opt/homebrew` — Apple Silicon Mac
  * `/usr/local` — Intel Mac
  * `/home/linuxbrew/.linuxbrew` — Linux
 
-On macOS, zsh plugins (`zsh-syntax-highlighting`, `zsh-history-substring-search`) and tools (`fnm`, `zoxide`) are expected to be installed via Homebrew. `zshrc/handy` and `zshrc/fnm` guard their setup with `$+commands[brew]` / `$+commands[fnm]` / `$+commands[zoxide]` so the config degrades gracefully on machines where they aren't present.
+On macOS, zsh plugins (`zsh-syntax-highlighting`, `zsh-history-substring-search`) and tools (`fnm`, `zoxide`) are expected to be installed via Homebrew — run `install-dependencies.sh` on a new machine. `zshrc/fnm` and `zshrc/handy` guard the *tools* on `$+commands[fnm]` / `$+commands[zoxide]`, and the two *plugins* on whether their files are readable.
+
+That distinction matters: `$+commands[brew]` only says Homebrew exists, not that these formulae are installed. Guarding the plugins on `brew` alone meant that on a machine with Homebrew but without them, `source` aborted with "no such file or directory" (exit 127) — which is exactly what happened here when the Homebrew prefix moved from `/usr/local` to `/opt/homebrew` and the plugins were left behind.
 
 On Linux without Homebrew, those plugins won't load. To enable them, install via your distro's package manager and source the plugin files from `.zshrc.local` on that machine.
 

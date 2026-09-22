@@ -4,20 +4,34 @@ calc(){ awk "BEGIN{ print $* }" ;}
 
 if (( $+commands[brew] )); then
     _brew_prefix=$(brew --prefix)
-    source $_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    ZSH_HIGHLIGHT_STYLES[globbing]=none
-    source $_brew_prefix/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-    unset _brew_prefix
 
-    # bind UP and DOWN arrow keys for history-substring-search
-    if [[ $LINUX == 1 ]]; then
-        zmodload zsh/terminfo
-        bindkey "$terminfo[kcuu1]" history-substring-search-up
-        bindkey "$terminfo[kcud1]" history-substring-search-down
-    else
-        bindkey '^[[A' history-substring-search-up
-        bindkey '^[[B' history-substring-search-down
+    # Guard on the plugin FILE, not just on brew being present. A machine can
+    # have Homebrew without these formulae -- which was true on this one until
+    # 2026-09-22 -- and an unguarded `source` then aborts with "no such file or
+    # directory" (exit 127) on every shell start. $+commands[brew] only tells
+    # you Homebrew exists, not that these formulae are installed.
+    _zsh_hl=$_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    if [[ -r $_zsh_hl ]]; then
+        source $_zsh_hl
+        ZSH_HIGHLIGHT_STYLES[globbing]=none
     fi
+
+    _zsh_hss=$_brew_prefix/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+    if [[ -r $_zsh_hss ]]; then
+        source $_zsh_hss
+
+        # bind UP and DOWN arrow keys for history-substring-search
+        if [[ $LINUX == 1 ]]; then
+            zmodload zsh/terminfo
+            bindkey "$terminfo[kcuu1]" history-substring-search-up
+            bindkey "$terminfo[kcud1]" history-substring-search-down
+        else
+            bindkey '^[[A' history-substring-search-up
+            bindkey '^[[B' history-substring-search-down
+        fi
+    fi
+
+    unset _brew_prefix _zsh_hl _zsh_hss
 fi
 
 if (( $+commands[zoxide] )); then
