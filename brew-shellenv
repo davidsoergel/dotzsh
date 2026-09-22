@@ -1,0 +1,31 @@
+# Locate Homebrew and apply its shellenv (Apple Silicon, Intel Mac, or Linux).
+#
+# Sourced TWICE by design:
+#
+#   1. from .zshenv  -- so non-login and non-interactive shells (scripts, cron,
+#      `ssh host cmd`) get the Homebrew prefix on PATH at all;
+#
+#   2. again from .zprofile -- because on macOS, /etc/zprofile runs
+#      `path_helper`, which rebuilds PATH from /etc/paths and /etc/paths.d.
+#      That happens AFTER .zshenv, and it pushes the Homebrew prefix behind
+#      /usr/bin, so brew-installed tools silently lose to the system ones
+#      (e.g. `openssl` resolving to /usr/bin/openssl, which is LibreSSL).
+#      .zprofile runs after /etc/zprofile, so re-asserting here wins.
+#
+# `brew shellenv` prepends its prefix, so the second pass puts it back in front.
+# It assigns to the SCALAR $PATH, and zsh only enforces `typeset -U` on
+# assignment to the TIED ARRAY $path -- so the eval alone leaves the earlier
+# copy stranded further down. Re-assigning the array afterwards collapses it,
+# keeping the first (newly prepended) occurrence.
+
+typeset -U path manpath
+
+for _brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+    if [[ -x $_brew ]]; then
+        eval "$($_brew shellenv)"
+        path=( $path )          # force the -U dedupe (see above)
+        manpath=( $manpath )
+        break
+    fi
+done
+unset _brew

@@ -21,4 +21,8 @@ fi
 # cd ~
 # echo
 
+# Re-assert Homebrew's prefix: /etc/zprofile ran path_helper just before this
+# file and demoted it behind /usr/bin. Idempotent; see brew-shellenv.
+source ~/.zsh/brew-shellenv
+
 source ~/.zprofile.local

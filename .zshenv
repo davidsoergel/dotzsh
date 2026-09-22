@@ -1,12 +1,8 @@
 
-# Homebrew (Apple Silicon, Intel Mac, or Linux)
-if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /usr/local/bin/brew ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+# Homebrew (Apple Silicon, Intel Mac, or Linux).
+# NOTE: on macOS this is undone by path_helper in /etc/zprofile, so the same
+# file is sourced again from .zprofile. See the comments in brew-shellenv.
+source ~/.zsh/brew-shellenv
 
 # Limits etc.
 limit coredumpsize 0 2> /dev/null
